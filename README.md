@@ -11,3 +11,16 @@ As we know SEI webservices are easy to implement and maintain, but fails on xml 
 
 checkout the reference on web service provider basic information in below link
 
+http://docs.oracle.com/cd/E24329_01/web.1211/e24965/provider.htm#WSADV191
+
+
+<h4>How To implemet the Provider Service</h4>
+<hr/>
+
+We have to use @webserviceprovider annotation instead of @webservice, and @serverMode as SOAP/PAYLOAD. provider wont be having wsdl by default we have to write manual wsdl and xsd file, wegen tool won't help generation as well for webservice 
+provider end point service.
+
+sample URL: <a href="ttp://localhost:8080/wsprovider/secure/soap/SimpleProviderService?wsdl">http://localhost:8080/wsprovider/secure/soap/SimpleProviderService?wsdl</a>
+
+
+
