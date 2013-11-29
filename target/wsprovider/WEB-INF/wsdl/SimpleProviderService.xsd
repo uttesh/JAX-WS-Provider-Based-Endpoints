@@ -1,0 +1,93 @@
+<xs:schema xmlns="http://www.uttesh.com/edi" xmlns:wsdl="http://www.informatica.com/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:infatype="http://www.informatica.com/types/" targetNamespace="http://www.uttesh.com/edi" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:import namespace="http://schemas.xmlsoap.org/wsdl/http/"/>
+    <xs:element name="publishMessageResponse" type="publishMessageResponseType"/>
+    <xs:complexType name="publishMessageRequestType">
+        <xs:sequence>
+            <xs:element name="publishMessageRequestElement">
+                <xs:complexType>
+                    <xs:sequence>
+
+                        <xs:element name="publishID" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:positiveInteger"/>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="action" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="create"/>
+                                    <xs:enumeration value="update"/>
+                                    <xs:enumeration value="delete"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="messageTimestamp" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:dateTime"></xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="messageVersion" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>message version is nn.nn format</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="[0-9]{2}(.[0-9]{2})"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="messageType" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="30"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="message" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1048576"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element ref="status" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="publishMessageResponseType">
+        <xs:sequence>
+            <xs:element name="publishMessageResponseElement">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="publishID" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="512"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="statusCode" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="OK"/>
+                                    <xs:enumeration value="WARN"/>
+                                    <xs:enumeration value="ERROR"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="statusMessage" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1048576"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="publishMessageRequest" type="publishMessageRequestType"/>
+</xs:schema>
